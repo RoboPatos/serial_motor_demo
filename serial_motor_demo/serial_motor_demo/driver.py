@@ -80,7 +80,8 @@ class MotorDriver(Node):
     # Raw serial commands
     
     def send_pwm_motor_command(self, mot_1_pwm, mot_2_pwm):
-        self.send_command(f"o {int(mot_1_pwm)} {int(mot_2_pwm)}")
+        #self.send_command(f"o {int(mot_1_pwm)} {int(mot_2_pwm)}")
+        self.send_command(f"5")
 
     def send_feedback_motor_command(self, mot_1_ct_per_loop, mot_2_ct_per_loop):
         self.send_command(f"m {int(mot_1_ct_per_loop)} {int(mot_2_ct_per_loop)}")
@@ -176,7 +177,7 @@ def main(args=None):
     rate = motor_driver.create_rate(2)
     while rclpy.ok():
         rclpy.spin_once(motor_driver)
-        motor_driver.check_encoders()
+        # motor_driver.check_encoders()
 
 
     motor_driver.close_conn()

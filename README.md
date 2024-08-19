@@ -15,35 +15,26 @@ The GUI provides a simple interface for development and testing of such a system
 
 The driver has a few parameters:
 
-- `encoder_cpr` - Encoder counts per revolution
-- `loop_rate` - Execution rate of the *Arduino* code (see Arduino side documentation for details)
 - `serial_port` - Serial port to connect to (default `/dev/ttyUSB0`)
-- `baud_rate` - Serial baud rate (default `57600`)
+- `baud_rate` - Serial baud rate (default `9600`)
 - `serial_debug` - Enables debugging of serial commands (default `false`)
 
 To run, e.g.
 ```
-ros2 run serial_motor_demo driver --ros-args -p encoder_cpr:=3440 -p loop_rate:=30 -p serial_port:=/dev/ttyUSB0 -p baud_rate:=57600
+ros2 run serial_motor_demo driver --ros-args -p serial_port:=/dev/ttyUSB0 -p baud_rate:=9600
 ```
 
 It makes use of the following topics
 - `motor_command` - Subscribes a `MotorCommand`, in rads/sec for each of the two motors
-- `motor_vels` - Publishes a `MotorVels`, motor velocities in rads/sec
-- `encoder_vals` - Publishes an `EncoderVals`, raw encoder counts for each motor
-
 
 
 ## GUI Usage
 
-Has two modes, one for raw PWM input (-255 to 255) and one for closed-loop control. In this mode you must first set the limits for the sliders.
+Has one mode for raw PWM input (-255 to 255).
 
 
 ## TODO
 
-- Add service for encoder reset
-- Add service for updating PID parameters
-- Stability improvements
-- More parameterisation
-
-
-
+- Update code for send messages for RAW BITES (int ao inves de string)
+- Add code for searching serial ports;
+- 

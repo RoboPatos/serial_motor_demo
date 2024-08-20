@@ -1,6 +1,5 @@
 import rclpy
 from rclpy.node import Node
-from serial_motor_demo_msgs.msg import MotorCommand
 import time
 import math
 import serial
@@ -13,16 +12,6 @@ class MotorDriver(Node):
 
 
         # Setup parameters
-
-        self.declare_parameter('encoder_cpr', value=0)
-        if (self.get_parameter('encoder_cpr').value == 0):
-            print("WARNING! ENCODER CPR SET TO 0!!")
-
-
-        self.declare_parameter('loop_rate', value=0)
-        if (self.get_parameter('loop_rate').value == 0):
-            print("WARNING! LOOP RATE SET TO 0!!")
-
 
         self.declare_parameter('serial_port', value="/dev/ttyUSB0")
         self.serial_port = self.get_parameter('serial_port').value
@@ -38,23 +27,6 @@ class MotorDriver(Node):
             print("Serial debug enabled")
 
 
-
-        # Setup topics & services
-
-        self.subscription = self.create_subscription(
-            MotorCommand,
-            'motor_command',
-            self.motor_command_callback,
-            10)
-
-        # Envia para GUI
-        # self.speed_pub = self.create_publisher(MotorVels, 'motor_vels', 10)
-
-        # self.encoder_pub = self.create_publisher(EncoderVals, 'encoder_vals', 10)
-        
-
-        # Member Variables
-
         self.last_enc_read_time = time.time()
         
         self.mutex = Lock()
@@ -65,13 +37,15 @@ class MotorDriver(Node):
         self.conn = serial.Serial(self.serial_port, self.baud_rate, timeout=1.0)
         print(f"Connected to {self.conn}")
         
-
+    #Swtch case
+    print(f"1) Velocidade 1 (75%) \n2) Velocidade 2 (50%) \n3) Velocidade 3 (25%) \n4) Parar\n5) Velocidade 4 (100%) \n6) Para trás (anti-horário)\n7) Para frente (horário)\n")
+            
     # Raw serial commands
     
     def send_pwm_motor_command(self, mot_1_speed, mot_2_speed):
         self.send_command(f"o {int(mot_1_speed)} {int(mot_2_speed)}")
         # para testar com velocidade fixa
-        # self.send_command(f"5") 
+        self.send_command(f"5") 
 
     # More user-friendly functions
 

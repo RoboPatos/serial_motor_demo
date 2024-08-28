@@ -41,8 +41,8 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/MotorCommand.msg"
-  "msg/MotorVels.msg"
-  "msg/EncoderVals.msg"
+  # "msg/MotorVels.msg"
+  # "msg/EncoderVals.msg"
 )
 
 

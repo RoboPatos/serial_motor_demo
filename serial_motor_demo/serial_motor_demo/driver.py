@@ -14,16 +14,6 @@ class MotorDriver(Node):
 
         # Setup parameters
 
-        self.declare_parameter('encoder_cpr', value=0)
-        if (self.get_parameter('encoder_cpr').value == 0):
-            print("WARNING! ENCODER CPR SET TO 0!!")
-
-
-        self.declare_parameter('loop_rate', value=0)
-        if (self.get_parameter('loop_rate').value == 0):
-            print("WARNING! LOOP RATE SET TO 0!!")
-
-
         self.declare_parameter('serial_port', value="/dev/ttyUSB0")
         self.serial_port = self.get_parameter('serial_port').value
 
@@ -36,7 +26,6 @@ class MotorDriver(Node):
         self.debug_serial_cmds = self.get_parameter('serial_debug').value
         if (self.debug_serial_cmds):
             print("Serial debug enabled")
-
 
 
         # Setup topics & services

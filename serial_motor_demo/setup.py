@@ -1,9 +1,9 @@
 from setuptools import setup
 
-package_name = 'serial_motor_demo'
+package_name = 'SciCoBot'
 
 setup(
-    name=SciCoBot_2.0,
+    name=package_name,
     version='2.0.0',
     packages=[package_name],
     data_files=[

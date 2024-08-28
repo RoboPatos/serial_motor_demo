@@ -4,7 +4,7 @@ package_name = 'serial_motor_demo'
 
 setup(
     name=package_name,
-    version='2.0.0',
+    version='0.0.0',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -13,8 +13,8 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Natanael',
-    maintainer_email='amilnatanael@gmail.com',
+    maintainer='newans',
+    maintainer_email='josh.newans@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],

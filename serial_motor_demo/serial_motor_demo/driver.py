@@ -58,6 +58,7 @@ class MotorDriver(Node):
     # Raw serial commands
     
     def send_pwm_motor_command(self, mot_1_speed, mot_2_speed):
+        print(f"o {int(mot_1_speed)} {int(mot_2_speed)}")
         self.send_command(f"o {int(mot_1_speed)} {int(mot_2_speed)}")
         # para testar com velocidade fixa
         # self.send_command(f"5") 
@@ -65,6 +66,7 @@ class MotorDriver(Node):
     # More user-friendly functions
 
     def motor_command_callback(self, motor_command):
+        print('cmd recebido')
         self.send_pwm_motor_command(motor_command.mot_1_speed, motor_command.mot_2_speed)
 
     # Utility functions

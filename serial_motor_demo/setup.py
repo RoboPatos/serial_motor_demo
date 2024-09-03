@@ -21,9 +21,9 @@ setup(
     entry_points={
         'console_scripts': [
             'gui = serial_motor_demo.gui:main',
-            'driver = serial_motor_demo.driver:main'
-            'find_ports = serial_motor_demo.find_ports:main'
-            # 'serial_teste = serial_motor_demo.serial_teste:main'
+            'driver = serial_motor_demo.driver:main',
+            'find_ports = serial_motor_demo.find_ports:main',
+            'serial_teste = serial_motor_demo.serial_teste:main'
         ],
     },
 )

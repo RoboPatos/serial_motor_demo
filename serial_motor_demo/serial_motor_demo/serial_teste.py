@@ -1,105 +1,78 @@
-# import rclpy
-# from rclpy.node import Node
-# import time
-# import math
-# import serial
-# from threading import Lock
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
 
-# class MotorDriver(Node):
+import serial
+import time
 
-#     def __init__(self):
-#         super().__init__('motor_driver')
+serial_comm = serial.Serial()
 
-
-#         # Setup parameters
-
-#         self.declare_parameter('serial_port', value="/dev/ttyUSB0")
-#         self.serial_port = self.get_parameter('serial_port').value
-
-
-#         self.declare_parameter('baud_rate', value=57600)
-#         self.baud_rate = self.get_parameter('baud_rate').value
-
-
-#         self.declare_parameter('serial_debug', value=False)
-#         self.debug_serial_cmds = self.get_parameter('serial_debug').value
-#         if (self.debug_serial_cmds):
-#             print("Serial debug enabled")
-
-
-#         self.last_enc_read_time = time.time()
-        
-#         self.mutex = Lock()
-
-#         # Open serial comms
-
-#         print(f"Connecting to port {self.serial_port} at {self.baud_rate}.")
-#         self.conn = serial.Serial(self.serial_port, self.baud_rate, timeout=1.0)
-#         print(f"Connected to {self.conn}")
-        
-#     #Swtch case
-#     print(f"1) Velocidade 1 (75%) \n2) Velocidade 2 (50%) \n3) Velocidade 3 (25%) \n4) Parar\n5) Velocidade 4 (100%) \n6) Para trás (anti-horário)\n7) Para frente (horário)\n")
-            
-#     # Raw serial commands
+class CommunicationNode(Node):
     
-#     def send_pwm_motor_command(self, mot_1_speed, mot_2_speed):
-#         self.send_command(f"o {int(mot_1_speed)} {int(mot_2_speed)}")
-#         # para testar com velocidade fixa
-#         self.send_command(f"5") 
+    def __init__(self):
+        super().__init__("serial_comm")
 
-#     # More user-friendly functions
+        self.declare_parameter("serial_port", "None") # Get port parameter from terminal or launch file.
+        self.declare_parameter("baud_rate", 0) # Get baud rate parameter from terminal or launch file.
+        self.declare_parameter("subscribe_to", "/serial_comm")
 
-#     def motor_command_callback(self, motor_command):
-#         self.send_pwm_motor_command(motor_command.mot_1_speed, motor_command.mot_2_speed)
+        sp, br, sub = self.read_parameters() # Read parameters which are coming from terminal or launch file.
 
-#     # Utility functions
+        self.connect_serial_port(serial_port=sp, baud_rate=br) # Connect to given port at given baud rate.
 
-#     def send_command(self, cmd_string):
-        
-#         self.mutex.acquire()
-#         try:
-#             cmd_string += "\r"
-#             self.conn.write(cmd_string.encode("utf-8"))
-#             if (self.debug_serial_cmds):
-#                 print("Sent: " + cmd_string)
+        time.sleep(0.5) # Wait for connection.
 
-#             ## Adapted from original
-#             c = ''
-#             value = ''
-#             while c != '\r':
-#                 c = self.conn.read(1).decode("utf-8")
-#                 if (c == ''):
-#                     print("Error: Serial timeout on command: " + cmd_string)
-#                     return ''
-#                 value += c
+        self.data_publisher_ = self.create_publisher(String, "serial_comm", 10) # Start publising serial port data.
 
-#             value = value.strip('\r')
+        if sub != "None":
+            self.data_subscriber_ = self.create_subscription(String, sub, self.write_serial_data, 10)
 
-#             if (self.debug_serial_cmds):
-#                 print("Received: " + value)
-#             return value
-#         finally:
-#             self.mutex.release()
+        self.get_logger().info("Serial communication has started.")
+        self.timer_ = self.create_timer(0.1, self.read_serial_data)
 
-#     def close_conn(self):
-#         self.conn.close()
+    def read_parameters(self):
+        serial_port_ = self.get_parameter("serial_port").get_parameter_value().string_value
+        baud_rate_ = self.get_parameter("baud_rate").get_parameter_value().integer_value
+        subscribe_ = self.get_parameter("subscribe_to").get_parameter_value().string_value
 
+        self.get_logger().info("Port: " + serial_port_ + " Baud Rate: " + str(baud_rate_) + " Subscribed To: " + subscribe_)
 
+        return serial_port_, baud_rate_, subscribe_
 
-# def main(args=None):
-    
-#     rclpy.init(args=args)
+    def connect_serial_port(self, serial_port, baud_rate):
+        serial_comm.port = serial_port
+        serial_comm.baudrate = baud_rate
+        serial_comm.timeout = 1
+        serial_comm.open()
 
-#     motor_driver = MotorDriver()
+    def read_serial_data(self):
+        try:
+            msg = String()
+            msg.data = serial_comm.readline().decode("utf-8").rstrip("\n").rstrip("\r")
+            self.data_publisher_.publish(msg)
+        except Exception as e:
+            self.get_logger().warn("Serial communication error. -Reading")
+            self.get_logger().warn(repr(e))
 
-#     rate = motor_driver.create_rate(2)
-#     while rclpy.ok():
-#         rclpy.spin_once(motor_driver)
-#         # motor_driver.check_encoders()
+    def write_serial_data(self, msg: String):
+        try:
+            msg = str(msg.data)
+            serial_comm.write(msg.encode("utf-8"))
+        except Exception as e:
+            self.get_logger().warn("Serial communication error. -Writing")
+            self.get_logger().warn(repr(e))
 
+    def cache_data(self, data: String):
+        self.get_logger().info(str(data.data))
+       
 
-#     motor_driver.close_conn()
-#     motor_driver.destroy_node()
-#     rclpy.shutdown()
+def main(args=None):
+    rclpy.init(args=args)
 
+    node = CommunicationNode()
+    rclpy.spin(node)
 
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()

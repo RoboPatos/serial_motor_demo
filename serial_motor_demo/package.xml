@@ -4,7 +4,7 @@
   <name>serial_motor_demo</name>
   <version>2.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="amilnatanael@gmail.com">newans</maintainer>
+  <maintainer email="amilnatanael@gmail.com">natanael</maintainer>
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>

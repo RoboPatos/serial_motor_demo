@@ -50,8 +50,8 @@ class MotorGui(Node):
         motor_btns_frame = Frame(root)
         motor_btns_frame.pack()
         Button(motor_btns_frame, text='ENVIAR', command=self.send_motor_once).pack(side=LEFT)
-        Button(motor_btns_frame, text='DINÂMICO.', command=self.show_values).pack(side=LEFT)
-        Button(motor_btns_frame, text='PARAR DINÂMICO', command=self.show_values).pack(side=LEFT)
+        #Button(motor_btns_frame, text='DINÂMICO.', command=self.show_values).pack(side=LEFT)
+        #Button(motor_btns_frame, text='PARAR DINÂMICO', command=self.show_values).pack(side=LEFT)
         Button(motor_btns_frame, text='PARAR', command=self.stop_motors).pack(side=LEFT)
         
 

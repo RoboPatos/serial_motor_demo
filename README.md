@@ -44,22 +44,19 @@ Termine com:
 source install/setup.bash
 ```
 
-## Driver configuration & usage
+## Driver
 
-O driver possui alguns parâmetros:
+ * O driver possui alguns parâmetros:
 
 - `serial_port` - Porta serial para conectar (padrão `/dev/ttyUSB0`)
 - `baud_rate` - Taxa de transmissão serial (padrão `9600`)
 - `serial_debug` - Ativa a depuração de comandos seriais (padrão `false`)
 
-Para executar, por exemplo:
+ * Execute com:
 
 ```
 ros2 run serial_motor_demo driver --ros-args -p serial_port:=/dev/ttyUSB0 -p baud_rate:=9600
 ```
-
-Ele utiliza os seguintes tópicos:
-- `motor_command` -  Inscreve um `MotorCommand`, em rad/s para cada um dos dois motores.
 
 ## GUI
 
@@ -82,5 +79,5 @@ ros2 run serial_motor_demo gui
 
 ## Nota de desenvolvimento - Melhorias
 
-- Adicionar botôes `Dinâmico` e `Parar dinâmico` que enviam automaticamente os valores para ambos motores, sem a necessidade de apertar o botão enviar o tempo todo.
-- Implementar código para leitura de dados enviados pelo Arduino.
+ * Adicionar botôes `Dinâmico` e `Parar dinâmico` que enviam automaticamente os valores para ambos motores, sem a necessidade de apertar o botão enviar o tempo todo.
+ * Implementar código para leitura de dados de algum sensor ligado no Arduino.

@@ -18,7 +18,7 @@ class MotorDriver(Node):
         self.serial_port = self.get_parameter('serial_port').value
 
 
-        self.declare_parameter('baud_rate', value=57600)
+        self.declare_parameter('baud_rate', value=9600)
         self.baud_rate = self.get_parameter('baud_rate').value
 
 

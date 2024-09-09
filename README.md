@@ -114,3 +114,5 @@ O conteudo relacionado à montagem e os scrips para o Arduino podem ser encontra
  * Adicionar botôes `Dinâmico` e `Parar dinâmico` que enviam automaticamente os valores para ambos motores, sem a necessidade de apertar o botão enviar o tempo todo.
  * Implementar código que escreve envia números de 1 a 7 na porta serial selecionada para comunicar com o projeto [scicobot_1-7](https://github.com/NatanaelAmil/scicobot_2ino/blob/main/outros_códigos/scicobot_1-7/scicobot_1-7.ino).
  * Implementar código para leitura de dados de algum sensor ligado no Arduino.
+
+A

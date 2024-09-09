@@ -77,6 +77,38 @@ ros2 run serial_motor_demo gui
  * ROS/Arduino Serial Motor Demo - [aqui](https://github.com/joshnewans/serial_motor_demo.git);
  * Aros2duino - [aqui](https://github.com/erenkarakis/Aros2duino.git);
 
+## Montagem
+
+O conteudo relacionado à montagem e os scrips para o Arduino podem ser encontrados[aqui](https://github.com/NatanaelAmil/scicobot_2ino). Para um melhor entendimento do circuito, acompanhe a tabela e a figura abaixo:
+
+            TABELA DE LIGAÇÃO
+
+      Arduino      |     Ponte H
+      --------------------------------
+         5V        |       +12V
+      --------------------------------
+        GND        |        GND
+      --------------------------------
+         5V        |        +5V
+      --------------------------------
+         D3        |        IN2
+      --------------------------------
+         D4        |        IN1
+      --------------------------------
+         D5        |        ENB
+      --------------------------------
+         D6        |        ENA
+      --------------------------------
+         D7        |        IN4
+      --------------------------------
+         D8        |        IN3
+      --------------------------------
+       * Remover jumper do VLogic
+
+<p align="center">
+  <img src="https://github.com/NatanaelAmil/scicobot_2ino/blob/main/outros_arquivos/Montagem_comentada.png"/ height="700" width="1080">
+</p>
+
 ## Nota de desenvolvimento - Melhorias
 
  * Adicionar botôes `Dinâmico` e `Parar dinâmico` que enviam automaticamente os valores para ambos motores, sem a necessidade de apertar o botão enviar o tempo todo.

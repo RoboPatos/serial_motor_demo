@@ -1,6 +1,6 @@
 # ROS2/Arduino Serial Motor Demo
 
-Esta é uma demonstração do funcionamento de uma nova versão do projeto SciCoBot, uma interface ROS 2 para um Arduino que executa código de controle de motor diferencial com um módulo L298N. O código correspondente para o Arduino pode ser encontrado [aqui](https://github.com/NatanaelAmil/scicobot_2ino).
+Esta é uma demonstração do funcionamento de uma nova versão do projeto SciCoBot, uma interface ROS 2 para um Arduino que executa código de controle de motor diferencial com um módulo L298N. O código correspondente para o Arduino pode ser encontrado [aqui](https://github.com/RoboPatos/scicobot_2ino).
 
 ## Componentes
 
@@ -21,7 +21,7 @@ cd ~/scicobot/src
 ```
  * Baixe o projeto com:
 ```
-git clone https://github.com/NatanaelAmil/serial_motor_demo.git
+git clone https://github.com/Robopatos/serial_motor_demo.git
 ```
  * Volte para a pasta root com:
 ```
@@ -106,13 +106,11 @@ O conteudo relacionado à montagem e os scrips para o Arduino podem ser encontra
        * Remover jumper do VLogic
 
 <p align="center">
-  <img src="https://github.com/NatanaelAmil/scicobot_2ino/blob/main/outros_arquivos/Montagem_comentada.png"/ height="700" width="1080">
+  <img src="https://github.com/RoboPatos/scicobot_2ino/blob/main/outros_arquivos/Montagem_comentada.png"/ height="700" width="1080">
 </p>
 
 ## Nota de desenvolvimento - Melhorias
 
  * Adicionar botôes `Dinâmico` e `Parar dinâmico` que enviam automaticamente os valores para ambos motores, sem a necessidade de apertar o botão enviar o tempo todo.
- * Implementar código que escreve envia números de 1 a 7 na porta serial selecionada para comunicar com o projeto [scicobot_1-7](https://github.com/NatanaelAmil/scicobot_2ino/blob/main/outros_códigos/scicobot_1-7/scicobot_1-7.ino).
+ * Implementar código que escreve envia números de 1 a 7 na porta serial selecionada para comunicar com o projeto [scicobot_1-7](https://github.com/RoboPatos/scicobot_2ino/blob/main/outros_códigos/scicobot_1-7/scicobot_1-7.ino).
  * Implementar código para leitura de dados de algum sensor ligado no Arduino.
-
-A

@@ -79,7 +79,7 @@ ros2 run serial_motor_demo gui
 
 ## Montagem
 
-O conteudo relacionado à montagem e os scrips para o Arduino podem ser encontrados[aqui](https://github.com/RoboPatos/scicobot_2ino). Para um melhor entendimento do circuito, acompanhe a tabela e a figura abaixo:
+O conteudo relacionado à montagem e os scrips para o Arduino podem ser encontrados [aqui](https://github.com/RoboPatos/scicobot_2ino). Para um melhor entendimento do circuito, acompanhe a tabela e a figura abaixo:
 
             TABELA DE LIGAÇÃO
 
